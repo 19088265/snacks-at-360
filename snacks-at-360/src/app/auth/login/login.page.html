@@ -1,0 +1,47 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+        <!-- <img alt=" " src="http://cfo360.co.uk/wp-content/uploads/2024/07/login-logo-2.svg" /> -->
+        <img alt=" " src="assets/login-logo-2.svg" />
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h2>Snacks at 360</h2>
+    </ion-row>
+    <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-button shape="" size="" expand="full" (click)="googleSignIn()">Login <ion-icon color="white" name="logo-chrome" slot="end" *ngIf="showIcon"></ion-icon></ion-button>
+    </ion-row> -->
+
+    <ion-row id="auth" class="ion-justify-content-center ion-align-items-center">
+
+      <ion-item>
+        <ion-input label="Email" labelPlacement="floating" placeholder="Enter email" [(ngModel)]="email" type="email"></ion-input>
+      </ion-item>
+
+    </ion-row>
+
+    <ion-row id="auth" class="ion-justify-content-center ion-align-items-center">
+      <ion-item>
+        <ion-input label="Password" labelPlacement="floating" placeholder="Enter password" [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-align-items-center"><ion-button expand="block" (click)="signIn()">Login</ion-button></ion-row>
+    <!-- <ion-row class="ion-justify-content-center ion-align-items-center"><ion-button expand="block" routerLink="/register">Register</ion-button></ion-row> -->
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <a href="/register">Don't have an account? Register now</a>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <h6>Powered by Ad Ignite</h6>
+    </ion-row>
+
+  </ion-grid>
+
+      <!-- <ion-button (click)="signout()">Sign out</ion-button> -->
+</ion-content>
