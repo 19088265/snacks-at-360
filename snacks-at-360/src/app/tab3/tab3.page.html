@@ -13,8 +13,8 @@
 
       <ion-card *ngFor="let order of group.orders">
         <ion-card-header>
-          <ion-card-title>Order: #{{ order.orderId }}</ion-card-title>
-          <ion-card-title>Date: {{ order.date | date: 'medium' }}</ion-card-title>
+          <ion-card-title><strong>Order:</strong> #{{ order.orderId.substring(0, 6) }}</ion-card-title>
+          <ion-card-title><strong>Date:</strong> {{ order.date | date: 'medium' }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>

@@ -12,8 +12,8 @@ export class LoginPage implements OnInit  {
 
   showIcon = false;
 
-  email: string = 'codercoca@gmail.com';
-  password: string = '12345A';
+  email: string = '';
+  password: string = '';
 
   ngOnInit(): void {
     this.showIcon = false;

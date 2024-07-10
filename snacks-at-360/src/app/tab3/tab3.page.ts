@@ -74,6 +74,15 @@ export class Tab3Page implements OnInit {
       return acc;
     }, {} as Record<string, { orders: Order[], total: number }>);
 
+    // Sort each month's orders by date after converting to Date object
+  for (const month of Object.keys(ordersByMonth)) {
+    ordersByMonth[month].orders.sort((a, b) => {
+      const dateA = a.date instanceof Date ? a.date : new Date(a.date); // Convert if not already a Date
+      const dateB = b.date instanceof Date ? b.date : new Date(b.date); // Convert if not already a Date
+      return dateA.getTime() - dateB.getTime();
+    });
+  }
+
     return months.map(month => ({
       month,
       orders: ordersByMonth[month]?.orders || [],
