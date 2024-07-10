@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Tuckshop History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="ordersByMonth$ | async as ordersByMonth">
+    <div *ngFor="let group of ordersByMonth">
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <h4><strong>{{ group.month }}</strong> - Total: R {{ group.total.toFixed(2) }}</h4>
+      </ion-row>
+
+      <ion-card *ngFor="let order of group.orders">
+        <ion-card-header>
+          <ion-card-title>Order: #{{ order.orderId }}</ion-card-title>
+          <ion-card-title>Date: {{ order.date | date: 'medium' }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list lines="none">
+            <ion-card-subtitle>Items:</ion-card-subtitle>
+            <ion-item *ngFor="let product of order.products">
+              <ion-label>
+                {{ product.productName }} <strong>(x{{ product.quantity }})</strong>
+                <br>
+                R {{ product.productPrice.toFixed(2) }}
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <ion-grid id="totalGrid">
+            <ion-row class="ion-justify-content-end ion-align-items-end">
+              <ion-label id="totalLabel">
+                Total: <strong>R {{ order.total.toFixed(2) }}</strong>
+              </ion-label>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="group.orders.length === 0">
+        <ion-card-content>
+          No snacking for this month. Amazing :)
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ng-container>
+</ion-content>

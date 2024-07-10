@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+
+ion-list-header {
+  background-color: whitesmoke;
+}
+
+ion-item {
+  --background: white;
+}
+
+ion-list {
+  --background-color: whitesmoke;
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  -webkit-animation: slide-in-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+	        animation: slide-in-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+}
+
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+ion-label {
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-transform: capitalize;
+}
+
+ion-title {
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+ion-card-title {
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+#totalLabel {
+  border: solid 1px #B1001A;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+ion-card {
+  border: solid 1px black;
+  margin-bottom: 25px;
+  -webkit-animation: slide-in-bottom 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bottom 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+ng-container {
+  --background: grey;
+}

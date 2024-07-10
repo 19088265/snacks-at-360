@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+#logOutBtn {
+  // --background: black;
+  --color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+ion-card {
+  border-radius: 10px;
+  border: solid 1px #B1001A;
+  -webkit-animation: slide-in-bottom 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-bottom 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+#cartBtn {
+  --background: black;
+}
+
+ion-label {
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-transform: capitalize;
+}
+
+ion-title {
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+#greetingGrid {
+  border: solid 1px black;
+  border-radius: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
+  background-color: black;
+  -webkit-animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+	        animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+}
+
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  margin-left: 20px;
+  color: white;
+}
+
+h5  {
+  margin-top: 20px;
+  color: grey;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: italic;
+  margin-left: 20px;
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  -webkit-animation: slide-in-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+	        animation: slide-in-left 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s both;
+}
+
+#addProductBtn {
+  --background: black;
+  margin-left: 85%;
+  -webkit-animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+	        animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+}
+
+h6  {
+  margin-top: 20px;
+  color: grey;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: italic;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top: solid 1px #B1001A;
+  padding-top: 15px;
+  -webkit-animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+	        animation: slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+            transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+p, li {
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
