@@ -1,0 +1,42 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <!-- <img alt=" " src="http://cfo360.co.uk/wp-content/uploads/2024/07/login-logo-2.svg" /> -->
+    <img alt=" " src="assets/login-logo-2.svg" />
+  </ion-row>
+
+  <!-- <ion-row class="ion-justify-content-center ion-align-items-center">
+    <h2>Snacks at 360</h2>
+  </ion-row> -->
+
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <h2>Create new account</h2>
+  </ion-row>
+
+  <ion-row id="auth" class="ion-justify-content-center ion-align-items-center">
+
+    <ion-item>
+      <ion-input label="Email" labelPlacement="floating" placeholder="Enter email" [(ngModel)]="email" type="email"></ion-input>
+    </ion-item>
+
+  </ion-row>
+
+  <ion-row id="auth" class="ion-justify-content-center ion-align-items-center">
+    <ion-item>
+      <ion-input label="Password" labelPlacement="floating" placeholder="Enter password" [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center ion-align-items-center"><ion-button expand="block" (click)="register()">Register</ion-button></ion-row>
+
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <a href="/login">Already have an account? Login now</a>
+  </ion-row>
+
+</ion-content>

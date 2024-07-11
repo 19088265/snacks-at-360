@@ -1,0 +1,7 @@
+{
+  "name": "snacks-at-360",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
