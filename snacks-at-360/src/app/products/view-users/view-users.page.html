@@ -18,10 +18,10 @@
         <ion-accordion *ngFor="let group of ordersByMonth" toggleIcon="caret-down-circle" toggleIconSlot="end">
           <ion-item slot="header">
             <ion-label>
-              <h4><strong> Employee: {{ group.username }}</strong></h4>
+              <h4><strong> Emp: {{ group.username }}</strong></h4>
             </ion-label>
             <ion-label>
-              <h4><strong>{{ group.month }}</strong> - R {{ group.total.toFixed(2) }} </h4>
+              <h4><strong>{{ group.month }}</strong> <br><strong>Total:</strong> R {{ group.total.toFixed(2) }} </h4>
             </ion-label>
           </ion-item>
           <ion-card-content slot="content">
