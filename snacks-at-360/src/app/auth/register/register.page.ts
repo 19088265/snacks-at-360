@@ -12,7 +12,8 @@ export class RegisterPage {
 
   email: string = '';
   password: string = '';
-  allowedDomains: string[] = ['adignite.co.za', 'cfo360.co.za'];
+  username: string = '';
+  allowedDomains: string[] = ['adignite.co.za', 'cfo360.co.za', 'gmail.com'];
 
   constructor(private authService: AuthService, private _snackBar: MatSnackBar, private router: Router) {}
 
@@ -27,7 +28,7 @@ export class RegisterPage {
 
   register() {
     if (this.isValidDomain(this.email)) {
-      this.authService.signUp(this.email, this.password).then(() => {
+      this.authService.signUp2(this.email, this.password, this.username).then(() => {
         this._snackBar.open('Registration done. Have fun grabbing a snack.', 'Ciao', { duration: 3000 });
         this.router.navigate(['/tabs']); // Adjust as necessary
       }).catch(error => {

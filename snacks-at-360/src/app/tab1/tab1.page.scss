@@ -44,10 +44,12 @@ ion-card {
 
 #cartBtn {
   --background: black;
+  width: 50%;
+  margin-top: 10px;
 }
 
 ion-label {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 300;
   color: black;
   font-family: "Montserrat", sans-serif;
@@ -187,5 +189,11 @@ p, li {
 
 ion-button:active {
   --color: #B1001A;
+}
+
+ion-card-content {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 

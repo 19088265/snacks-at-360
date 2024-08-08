@@ -31,6 +31,15 @@ export class Tab3Page implements OnInit {
   totalAllOrders$: Observable<number> | undefined;
   ordersByMonth$: Observable<{ month: string, orders: Order[], total: number }[]> | undefined;
 
+  userIds: string[] = ['rHtBzkcxO1dx5wHyGKGyPqzwnh42', 'lZ73oFEiPEN3iJFcdf0vIYjsFBF3'];
+  //userIdsFromDatabase: string[] = [];
+  userIdsFromDatabase$: Observable<string[]> | undefined;
+  private userId: string = 'rHtBzkcxO1dx5wHyGKGyPqzwnh42';
+  orderByMonth$: Observable<any[]>[] = [];
+
+  users$: Observable<any[]> | undefined;
+
+
   constructor(private cartService: CartService, private authService: AuthService, private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {}
@@ -40,6 +49,8 @@ export class Tab3Page implements OnInit {
   }
 
   ngOnInit() {
+
+    //fetch orders of one user
     this.authService.getCurrentUserId().subscribe(userId => {
       if (userId) {
         //this.pastOrders$ = this.cartService.getUserOrders(userId);
@@ -50,16 +61,34 @@ export class Tab3Page implements OnInit {
       }
     });
 
-
-
-    //this.pastOrders$ = this.cartService.getPastOrders(); // Assuming this method fetches the past orders
-    // this.totalAllOrders$ = this.pastOrders$?.pipe(
-    //   map(orders => orders.reduce((acc, order) => acc + order.total, 0))
-    // );
-
+    //fetch orders of all users
+    // this.authService.getAllUserIds().subscribe(userId => {
+    //   if (userId) {
+    //     this.userIds.forEach(userId => {
+    //       const orders$ = this.cartService.getUserOrders(userId).pipe(
+    //         map(orders => this.groupAndFillOrdersByMonth(orders))
+    //       );
+    //       this.orderByMonth$?.push(orders$);
+    //     });
+    //   }
+    // });
 
     this.totalAllOrders$ = this.getTotalSum();
 
+    // this.authService.getAllUsers().subscribe(users => {
+    //   users.forEach(user => {
+    //     console.log('Username:' + user.username + ' Id:' + user.id + ' Email:' + user.email + ' Role:' + user.role);
+    //   });
+    // });
+
+    //fetch and store all user ids
+    //this.userIdsFromDatabase$ = this.authService.getAllUserIds();
+    // this.authService.getAllUserIds()
+    //   .pipe(first()) // You can use take(1) as well
+    //   .subscribe(ids => {
+    //     this.userIds = ids;
+    //     console.log('User IDs:', this.userIds);
+    //   });
   }
 
   private groupAndFillOrdersByMonth(orders: Order[]): { month: string, orders: Order[], total: number }[] {
@@ -102,40 +131,6 @@ export class Tab3Page implements OnInit {
     ) : of(0); // Return an Observable of 0 if pastOrders$ is undefined
   }
 
-  // placeOrder() {
-  //   this.authService.getCurrentUserId().pipe(first()).subscribe(userId => {
-  //     if (userId) {
-  //       this.cartService.placeOrder(userId).then(() => {
-  //         console.log('Order placed successfully');
-  //         // Handle navigation or clearing up after order
-  //       }).catch(error => {
-  //         console.error('Failed to place order:', error);
-  //       });
-  //     } else {
-  //       console.error('No user logged in');
-  //     }
-  //   });
-  // }
 
-  // placeOrder2() {
-  //   this.authService.getCurrentUserId().pipe(
-  //     first(),
-  //     switchMap(userId => {
-  //       if (userId) {
-  //         return this.cartService.makeOrder(userId);
-  //       } else {
-  //         throw new Error('No user logged in');
-  //       }
-  //     })
-  //   ).subscribe({
-  //     next: () => {
-  //       console.log('Order placed successfully');
-  //       // Handle navigation or clearing up after order
-  //     },
-  //     error: (error) => {
-  //       console.error('Failed to place order:', error);
-  //     }
-  //   });
-  // }
 
 }

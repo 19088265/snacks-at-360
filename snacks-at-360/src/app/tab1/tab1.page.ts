@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { WelcomeDialogPage } from '../dialogs/welcome-dialog/welcome-dialog.page';
+import { switchMap, Observable, first } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -18,6 +19,7 @@ export class Tab1Page implements OnInit {
   products: Product[] = [];
   cart: { [productId: string]: number } = {};  // Tracks product IDs and quantities
   isModalOpen:boolean = false;
+  username: string | null = null;
 
   constructor(private dataService: DataService, private cartService: CartService, private authService: AuthService,
     private router: Router, private _snackBar: MatSnackBar, public dialog: MatDialog) {}
@@ -28,6 +30,19 @@ export class Tab1Page implements OnInit {
     });
     //this.openWelcomeDialog();
     this.isModalOpen = true;
+
+    this.authService.getCurrentUserId().pipe(
+      switchMap(userId => {
+        if (userId) {
+          return this.authService.getUserByUserId(userId);
+        } else {
+          return new Observable<any>();
+        }
+      }),
+      first() // Take the first value and complete
+    ).subscribe(user => {
+      this.username = user?.username || 'there';
+    });
   }
 
   setOpen(isOpen: boolean) {
@@ -54,6 +69,7 @@ export class Tab1Page implements OnInit {
   signout() {
     this.authService.signOut().then(res => {
       console.log('Successfully signed out with Google!', res);
+      //localStorage.clear();
       this._snackBar.open('You logged out. Have a nice day', 'Sure', {
         duration: 3000
       });

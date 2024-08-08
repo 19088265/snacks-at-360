@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { AuthService } from 'src/app//services/auth.service';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { Order } from 'src/app/models/order';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { catchError, concatMap, map, toArray } from 'rxjs/operators';
+import { catchError, concatMap, first, map, toArray } from 'rxjs/operators';
 import { forkJoin, from } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Timestamp } from 'firebase/firestore';
@@ -17,14 +18,20 @@ interface CartItem {
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService implements OnInit {
 
   //private cart = new BehaviorSubject<{ [productId: string]: number }>({});
   private cart = new BehaviorSubject<{ [productId: string]: CartItem }>({});
   private itemCount = new BehaviorSubject<number>(0);
+  //userEmail$!: Observable<string | null>;
 
+  constructor(private firestore: AngularFirestore, private authService: AuthService) {}
 
-  constructor(private firestore: AngularFirestore) {}
+  // eslint-disable-next-line @angular-eslint/contextual-lifecycle
+  ngOnInit() {
+    //this.userEmail$ = this.authService.getCurrentUserEmail();
+    console.log('')
+  }
 
   // Observable to track cart changes
   // getCart(): Observable<{ [productId: string]: number }> {
@@ -99,26 +106,26 @@ export class CartService {
     return this.cart.value;
   }
 
-  // placeOrder(userId: string): Promise<void> {
-  //   const products = this.getCartSnapshot();
-  //   const order: Order = {
-  //     orderId: this.firestore.createId(),
-  //     userId: userId,
-  //     products: Object.keys(products).map(productId => ({ productId, quantity: products[productId] })),
-  //     total: 0, // Calculate total price if prices are stored/stated somewhere
-  //     date: new Date()
-  //   };
-
-  //   return this.firestore.collection('orders').doc(order.orderId).set(order).then(() => {
-  //     this.clearCart(); // Clear the cart after placing the order
-  //   });
-  // }
-
-  placeOrder(userId: string): Promise<void> {
+  async placeOrder(userId: string): Promise<void> {
     const products = this.getCartSnapshot();
+
+    // Fetch the current user's email
+    const email = await this.authService.getCurrentUserEmail().pipe(first()).toPromise();
+    if (!email) {
+      throw new Error('User email not found');
+    }
+
+    // Fetch the current user's data
+    const user = await this.authService.getUserByUserId(userId).pipe(first()).toPromise();
+    if (!user || !user.email) {
+      throw new Error('User or user email not found');
+    }
+
     const order: Order = {
       orderId: this.firestore.createId(), // Generate a unique order ID
       userId: userId,
+      email: email,
+      username: user.username,
       products: Object.keys(products).map(productId => ({
         productId: productId,
         productName: products[productId].name,
@@ -126,18 +133,20 @@ export class CartService {
         quantity: products[productId].quantity
       })),
       total: Object.values(products).reduce((total, item) => total + (item.price * item.quantity), 0), // Calculate total price
-      date: new Date() // Current date and time
-      //date: new Date(2024, 1, 10, 12, 0)
+      date: new Date()
+
+      //Note below: month runs like an array, starts from zero
+      //date: new Date(2024, 6, 10, 12, 0) // July 10, 2024, at 12:00 PM (noon)
     };
 
     // Save the order to Firestore and clear the cart afterwards
-    return this.firestore.collection('orders').doc(order.orderId).set(order).then(() => {
+    return this.firestore.collection('purchases').doc(order.orderId).set(order).then(() => {
       this.clearCart(); // Clear the cart after placing the order
     });
 }
 
   getUserOrders(userId: string): Observable<Order[]> {
-    return this.firestore.collection<Order>('orders', ref => ref.where('userId', '==', userId)).valueChanges().pipe(
+    return this.firestore.collection<Order>('purchases', ref => ref.where('userId', '==', userId)).valueChanges().pipe(
       map(orders => orders.map(order => ({
         ...order,
         date: (order.date as any).toDate()
@@ -198,34 +207,6 @@ export class CartService {
     );
   }
 
-  // makeOrder(userId: string): Observable<any> {
-  //   const cart = this.getCartSnapshot();
-  //   const ids = Object.keys(cart);
 
-  //   return forkJoin(
-  //     ids.map(id =>
-  //       this.getProductById(id).pipe(
-  //         map(product => ({
-  //           id,  // Use 'id' instead of 'productId'
-  //           name: product?.name,
-  //           description: product?.description,
-  //           price: product?.price,
-  //           quantity: cart[id]
-  //         }))
-  //       )
-  //     )
-  //   ).pipe(
-  //     mergeMap(products => {
-  //       const order = {
-  //         orderId: this.firestore.createId(),
-  //         userId: userId,
-  //         products: products,
-  //         total: products.reduce((acc, prod) => acc + (prod?.price || 0) * prod.quantity, 0),
-  //         date: new Date()
-  //       };
-  //       return from(this.firestore.collection('orders').doc(order.orderId).set(order));
-  //     })
-  //   );
-  // }
 
 }
