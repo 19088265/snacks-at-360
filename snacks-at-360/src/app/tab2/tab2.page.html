@@ -40,22 +40,27 @@
     </ion-item>
   </ion-list>
 
-  <ion-grid id="totalGrid">
-    <ion-row class="ion-justify-content-end ion-align-items-end">
+  <ion-grid id="totalGrid" *ngIf="(cartTotal$ | async | number) as cartTotal">
+    <ion-row class="ion-justify-content-end ion-align-items-end"  *ngIf="cartTotal > '0'">
       <ion-label class="">
         Total: <strong>R{{ cartTotal$ | async | number:'1.2-2' }}</strong>
       </ion-label>
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
-    <ion-row>
+  <ion-grid *ngIf="(cartTotal$ | async | number) as cartTotal">
+    <ion-row *ngIf="cartTotal > '0'">
       <ion-col><ion-button shape="round" id="checkoutBtn" (click)="placeOrder()" expand="full">Checkout</ion-button></ion-col>
     </ion-row>
     <!-- <ion-row>
       <ion-col><ion-button id="clearBtn" expand="" (click)="clearCart()">Clear Cart<ion-icon slot="end" name="delete"></ion-icon></ion-button></ion-col>
     </ion-row> -->
   </ion-grid>
+
+  <!-- If the cart is empty -->
+  <ion-row id="emptyCartRow" *ngIf="(cartTotal$ | async | number) as cartTotal" class="ion-justify-content-center ion-align-items-center">
+    <ion-label *ngIf="cartTotal === '0'">Your cart is empty</ion-label>
+  </ion-row>
 
 </ion-content>
 

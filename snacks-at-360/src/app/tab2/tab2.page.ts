@@ -29,8 +29,10 @@ export class Tab2Page implements OnInit {
     this.cartTotal$ = this.cartService.getCart().pipe(
       map(cartItems => {
         return Object.values(cartItems).reduce((total, item) => total + (item.price * item.quantity), 0);
-      })
+      }),
     );
+
+    console.log("initial total is " + this.cartTotal$)
   }
 
   removeFromCart(productId: string) {
