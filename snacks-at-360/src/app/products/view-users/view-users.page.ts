@@ -30,7 +30,8 @@ export class ViewUsersPage implements OnInit {
   ordersByMonth$: Observable<{ month: string, orders: Order[], total: number, username: string, email: string, }[]> | undefined;
   ordersByMonth2$: Observable<{ userId: string, username: string, month: string, orders: Order[], total: number }[]> | undefined;
 
-  userIds: string[] = ['rHtBzkcxO1dx5wHyGKGyPqzwnh42', 'lZ73oFEiPEN3iJFcdf0vIYjsFBF3', '33w4rtjafyMYLj9mSvt47Z39uy43'];
+  //userIds: string[] = ['rHtBzkcxO1dx5wHyGKGyPqzwnh42', 'lZ73oFEiPEN3iJFcdf0vIYjsFBF3', '33w4rtjafyMYLj9mSvt47Z39uy43'];
+  userIds: string[] = [];
   //userIdsFromDatabase: string[] = [];
   userIdsFromDatabase$: Observable<string[]> | undefined;
   private userId: string = 'rHtBzkcxO1dx5wHyGKGyPqzwnh42';
@@ -48,18 +49,26 @@ export class ViewUsersPage implements OnInit {
     ngOnInit() {
 
       this.userName$ = this.authService.getCurrentUserEmail();
-      console.log('Current user ' + this.userName$)
+      //console.log('Current user ' + this.userName$)
 
       //fetch orders of one user
-      this.authService.getCurrentUserId().subscribe(userId => {
-        if (userId) {
-          //this.pastOrders$ = this.cartService.getUserOrders(userId);
-          //console.log("This user is " + userId);
-          this.ordersByMonth$ = this.cartService.getUserOrders(userId).pipe(
-            map(orders => this.groupAndFillOrdersByMonth(orders))
-          );
-        }
-      });
+      // this.authService.getCurrentUserId().subscribe(userId => {
+      //   if (userId) {
+      //     //this.pastOrders$ = this.cartService.getUserOrders(userId);
+      //     //console.log("This user is " + userId);
+      //     this.ordersByMonth$ = this.cartService.getUserOrders(userId).pipe(
+      //       map(orders => this.groupAndFillOrdersByMonth(orders))
+      //     );
+      //   }
+      // });
+
+      //fetch and store all user ids
+      this.authService.getAllUserIds()
+        .pipe(first()) // You can use take(1) as well
+        .subscribe(ids => {
+          this.userIds = ids;
+          //console.log('User IDs:', this.userIds);
+        });
 
       //fetch orders of all users
       this.authService.getAllUserIds().subscribe(userId => {
@@ -77,18 +86,11 @@ export class ViewUsersPage implements OnInit {
 
       this.authService.getAllUsers().subscribe(users => {
         users.forEach(user => {
-          console.log('Username:' + user.username + ' Id:' + user.id + ' Email:' + user.email + ' Role:' + user.role);
+          //console.log('Username:' + user.username + ' Id:' + user.id + ' Email:' + user.email + ' Role:' + user.role);
         });
       });
 
-      //fetch and store all user ids
-      //this.userIdsFromDatabase$ = this.authService.getAllUserIds();
-      this.authService.getAllUserIds()
-        .pipe(first()) // You can use take(1) as well
-        .subscribe(ids => {
-          this.userIds = ids;
-          console.log('User IDs:', this.userIds);
-        });
+
     }
 
     ////////////////////////functions//////////////////////////////
