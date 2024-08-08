@@ -67,6 +67,11 @@ export class Tab1Page implements OnInit {
   }
 
   signout() {
+
+    //Clear cache
+    localStorage.clear();
+    sessionStorage.clear();
+
     this.authService.signOut().then(res => {
       console.log('Successfully signed out with Google!', res);
       //localStorage.clear();

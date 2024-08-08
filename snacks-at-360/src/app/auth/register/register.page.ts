@@ -27,6 +27,11 @@ export class RegisterPage {
   // }
 
   register() {
+
+    //Clear cache
+    localStorage.clear();
+    sessionStorage.clear();
+
     if (this.isValidDomain(this.email)) {
       this.authService.signUp2(this.email, this.password, this.username).then(() => {
         this._snackBar.open('Registration done. Have fun grabbing a snack.', 'Ciao', { duration: 3000 });

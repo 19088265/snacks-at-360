@@ -45,6 +45,11 @@ export class LoginPage implements OnInit  {
   }
 
   signout() {
+
+    //Clear cache
+    localStorage.clear();
+    sessionStorage.clear();
+
     this.authService.signOut().then(res => {
       console.log('Successfully signed out with Google!', res);
       //this.router.navigate(['/tabs/tab1']);
@@ -55,6 +60,11 @@ export class LoginPage implements OnInit  {
   }
 
   signIn() {
+
+    //Clear cache
+    localStorage.clear();
+    sessionStorage.clear();
+
     this.authService.signIn(this.email, this.password).then(() => {
       this._snackBar.open('Yay! Login successful. Go snack up', 'Why not?', { duration: 3000 });
       this.router.navigate(['/tabs']); // adjust as necessary
